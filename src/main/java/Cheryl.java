@@ -145,12 +145,26 @@ public class Cheryl {
                             String to = times[1].trim();
                             tasks.add(new Event(title, from, to));
                             System.out.println("Got it. I've added this task:");
-                            System.out.println(tasks.get(tasks.size()-1));
+                            System.out.println(tasks.get(tasks.size() - 1));
                             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                         }
                     }
                 } catch (Exception e) {
                     System.out.println("Invalid event format! Use: event <title> /from <start> /to <end>");
+                }
+            } else if (cmd.startsWith("delete ")) {
+                try {
+                    int index = Integer.parseInt(cmd.split(" ")[1]) - 1;
+                    if (index < 0 || index >= tasks.size()) {
+                        System.out.println("Invalid task number");
+                    } else {
+                        Task removed = tasks.remove(index);
+                        System.out.println("Noted. I've removed this task:");
+                        System.out.println(removed);
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Invalid task number");
                 }
             } else {
                 System.out.println("Invalid command");
