@@ -105,36 +105,52 @@ public class Cheryl {
                     System.out.println("Invalid task number");
                 }
             } else if (cmd.startsWith("todo ")) {
-                String title = cmd.substring(5).trim();
-                tasks.add(new Todo(title));
-                System.out.println("Got it. I've added this task:");
-                System.out.println(tasks.get(tasks.size()-1));
-                System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            } else if (cmd.startsWith("deadline ")) {
-                try {
-                    String[] parts = cmd.substring(9).split("/by", 2);
-                    String title = parts[0].trim();
-                    String by = parts[1].trim();
-                    tasks.add(new Deadline(title, by));
+                String title = cmd.length() > 4 ? cmd.substring(5).trim() : "";
+                if (title.isEmpty()) {
+                    System.out.println("OOPS!!! The description of a todo cannot be empty.");
+                } else {
+                    tasks.add(new Todo(title));
                     System.out.println("Got it. I've added this task:");
                     System.out.println(tasks.get(tasks.size()-1));
                     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                }
+            } else if (cmd.startsWith("deadline ")) {
+                try {
+                    String[] parts = cmd.substring(9).split("/by", 2);
+                    if (parts.length < 2 || parts[0].trim().isEmpty() || parts[1].trim().isEmpty()) {
+                        System.out.println("OOPS!!! The description or date of a deadline cannot be empty.");
+                    } else {
+                        String title = parts[0].trim();
+                        String by = parts[1].trim();
+                        tasks.add(new Deadline(title, by));
+                        System.out.println("Got it. I've added this task:");
+                        System.out.println(tasks.get(tasks.size() - 1));
+                        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    }
                 } catch (Exception e) {
                     System.out.println("Invalid deadline format! Use: deadline <title> /by <date>");
                 }
             } else if (cmd.startsWith("event ")) {
                 try {
                     String[] parts = cmd.substring(6).split("/from", 2);
-                    String title = parts[0].trim();
-                    String[] times = parts[1].split("/to", 2);
-                    String from = times[0].trim();
-                    String to = times[1].trim();
-                    tasks.add(new Event(title, from, to));
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(tasks.get(tasks.size()-1));
-                    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                    if (parts.length < 2 || parts[0].trim().isEmpty()) {
+                        System.out.println("OOPS!!! The description of an event cannot be empty.");
+                    } else {
+                        String title = parts[0].trim();
+                        String[] times = parts[1].split("/to", 2);
+                        if (times.length < 2 || times[0].trim().isEmpty() || times[1].trim().isEmpty()) {
+                            System.out.println("OOPS!!! Start and end time of an event cannot be empty.");
+                        } else {
+                            String from = times[0].trim();
+                            String to = times[1].trim();
+                            tasks.add(new Event(title, from, to));
+                            System.out.println("Got it. I've added this task:");
+                            System.out.println(tasks.get(tasks.size()-1));
+                            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+                        }
+                    }
                 } catch (Exception e) {
-                    System.out.println("     Invalid event format! Use: event <title> /from <start> /to <end>");
+                    System.out.println("Invalid event format! Use: event <title> /from <start> /to <end>");
                 }
             } else {
                 System.out.println("Invalid command");
