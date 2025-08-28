@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -41,16 +43,18 @@ class Todo extends Task {
 }
 
 class Deadline extends Task {
-    String dueDate;
+    LocalDate dueDate;
 
-    Deadline(String title, String dueDate) {
+    Deadline(String title, String dueDateStr) {
         super(title);
-        this.dueDate = dueDate;
+        // parse the string into LocalDate
+        this.dueDate = LocalDate.parse(dueDateStr);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dueDate + ")";
+        // format it as "MMM d yyyy"
+        return "[D]" + super.toString() + " (by: " + dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
 
