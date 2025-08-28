@@ -1,3 +1,10 @@
+package cheryl.command;
+
+import cheryl.util.DukeException;
+import cheryl.util.Storage;
+import cheryl.util.TaskList;
+import cheryl.util.Ui;
+
 public class MarkCommand extends Command {
     private int index;
 

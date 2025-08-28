@@ -1,7 +1,15 @@
-public class UnmarkCommand extends Command {
+package cheryl.command;
+
+import cheryl.task.Task;
+import cheryl.util.DukeException;
+import cheryl.util.Storage;
+import cheryl.util.TaskList;
+import cheryl.util.Ui;
+
+public class DeleteCommand extends Command {
     private int index;
 
-    public UnmarkCommand(String arguments) throws DukeException {
+    public DeleteCommand(String arguments) throws DukeException {
         try {
             this.index = Integer.parseInt(arguments) - 1;
         } catch (NumberFormatException e) {
@@ -13,9 +21,10 @@ public class UnmarkCommand extends Command {
         if (index < 0 || index >= tasks.getSize()) {
             throw new DukeException("Invalid task number");
         }
-        tasks.unmarkTask(index);
-        ui.showMessage("OK, I've marked this task as not done yet:");
-        ui.showMessage(tasks.getTask(index).toString());
+        Task removed = tasks.deleteTask(index);
+        ui.showMessage("Noted. I've removed this task:");
+        ui.showMessage(removed.toString());
+        ui.showMessage("Now you have " + tasks.getSize() + " tasks in the list.");
         try {
             storage.save(tasks.getTasks());
         } catch (Exception e) {

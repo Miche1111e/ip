@@ -1,10 +1,12 @@
+package cheryl.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     LocalDate dueDate;
 
-    Deadline(String title, LocalDate dueDate) {
+    public Deadline(String title, LocalDate dueDate) {
         super(title);
         this.dueDate = dueDate;
     }

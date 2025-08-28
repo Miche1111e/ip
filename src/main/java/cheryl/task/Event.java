@@ -1,8 +1,10 @@
+package cheryl.task;
+
 public class Event extends Task {
     String from;
     String to;
 
-    Event(String title, String from, String to) {
+    public Event(String title, String from, String to) {
         super(title);
         this.from = from;
         this.to = to;

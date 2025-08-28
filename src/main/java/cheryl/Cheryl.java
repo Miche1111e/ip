@@ -1,3 +1,12 @@
+package cheryl;
+
+import cheryl.command.Command;
+import cheryl.util.DukeException;
+import cheryl.util.Parser;
+import cheryl.util.Storage;
+import cheryl.util.TaskList;
+import cheryl.util.Ui;
+
 public class Cheryl {
     private Storage storage;
     private TaskList tasks;

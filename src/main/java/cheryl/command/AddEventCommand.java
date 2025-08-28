@@ -1,3 +1,12 @@
+package cheryl.command;
+
+import cheryl.task.Task;
+import cheryl.task.Event;
+import cheryl.util.DukeException;
+import cheryl.util.Storage;
+import cheryl.util.TaskList;
+import cheryl.util.Ui;
+
 public class AddEventCommand extends Command {
     private String title;
     private String from;

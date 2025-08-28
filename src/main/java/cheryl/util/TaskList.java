@@ -1,3 +1,6 @@
+package cheryl.util;
+
+import cheryl.task.Task;
 import java.util.ArrayList;
 
 public class TaskList {

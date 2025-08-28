@@ -1,3 +1,5 @@
+package cheryl.util;
+
 import java.util.Scanner;
 
 public class Ui {

@@ -1,3 +1,5 @@
+package cheryl.task;
+
 public class Task {
     String title;
     boolean isDone;

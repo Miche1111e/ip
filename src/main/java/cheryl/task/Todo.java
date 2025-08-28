@@ -1,5 +1,7 @@
+package cheryl.task;
+
 public class Todo extends Task {
-    Todo(String title) {
+    public Todo(String title) {
         super(title);
     }
 

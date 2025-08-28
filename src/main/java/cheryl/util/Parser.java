@@ -1,3 +1,15 @@
+package cheryl.util;
+
+import cheryl.command.AddDeadlineCommand;
+import cheryl.command.AddEventCommand;
+import cheryl.command.AddTodoCommand;
+import cheryl.command.Command;
+import cheryl.command.DeleteCommand;
+import cheryl.command.ExitCommand;
+import cheryl.command.ListCommand;
+import cheryl.command.MarkCommand;
+import cheryl.command.UnmarkCommand;
+
 public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String[] parts = fullCommand.split(" ", 2);
