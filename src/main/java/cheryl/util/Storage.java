@@ -11,13 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+
 
 public class Storage {
     private String filePath;
@@ -81,13 +75,13 @@ public class Storage {
         for (Task t : tasks) {
             String line = "";
             if (t instanceof Todo) {
-                line = "T | " + (t.isDone ? "1" : "0") + " | " + t.title;
+                line = "T | " + (t.isDone() ? "1" : "0") + " | " + t.getTitle();
             } else if (t instanceof Deadline) {
                 Deadline d = (Deadline) t;
-                line = "D | " + (d.isDone ? "1" : "0") + " | " + d.title + " | " + d.dueDate;
+                line = "D | " + (d.isDone() ? "1" : "0") + " | " + d.getTitle() + " | " + d.getDueDate();
             } else if (t instanceof Event) {
                 Event e = (Event) t;
-                line = "E | " + (e.isDone ? "1" : "0") + " | " + e.title + " | " + e.from + " | " + e.to;
+                line = "E | " + (e.isDone() ? "1" : "0") + " | " + e.getTitle() + " | " + e.getFrom() + " | " + e.getTo();
             }
             fw.write(line + "\n");
         }

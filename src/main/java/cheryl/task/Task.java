@@ -15,6 +15,9 @@ public class Task {
     public void unmark() {
         isDone = false;
     }
+    public boolean isDone() { return isDone; }
+    public String getTitle() { return title; }
+
 
     @Override
     public String toString() {
