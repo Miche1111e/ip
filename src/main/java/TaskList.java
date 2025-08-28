@@ -1,40 +1,41 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class TaskList {
-    private final ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
-    // Constructor: start with an empty list
     public TaskList() {
-        tasks = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
-    // Constructor: start with a pre-existing list (e.g., loaded from file)
-    public TaskList(List<Task> initialTasks) {
-        tasks = new ArrayList<>(initialTasks);
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
-    public void addTask(Task t) {
-        tasks.add(t);
+    public void addTask(Task task) {
+        tasks.add(task);
     }
 
-    public Task deleteTask(int index) throws IndexOutOfBoundsException {
+    public Task deleteTask(int index) {
         return tasks.remove(index);
     }
 
-    public void markTask(int index) throws IndexOutOfBoundsException {
+    public Task getTask(int index) {
+        return tasks.get(index);
+    }
+
+    public void markTask(int index) {
         tasks.get(index).mark();
     }
 
-    public void unmarkTask(int index) throws IndexOutOfBoundsException {
+    public void unmarkTask(int index) {
         tasks.get(index).unmark();
     }
 
-    public List<Task> getTasks() {
-        return new ArrayList<>(tasks); // return a copy to avoid external modification
+    public int getSize() {
+        return tasks.size();
     }
 
-    public int size() {
-        return tasks.size();
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 }
