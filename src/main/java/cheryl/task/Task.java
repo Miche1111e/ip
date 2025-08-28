@@ -9,10 +9,10 @@ public class Task {
         this.isDone = false;
     }
 
-    void mark() {
+    public void mark() {
         this.isDone = true;
     }
-    void unmark() {
+    public void unmark() {
         isDone = false;
     }
 
