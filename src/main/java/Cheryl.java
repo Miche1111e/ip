@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -41,16 +44,18 @@ class Todo extends Task {
 }
 
 class Deadline extends Task {
-    String dueDate;
+    LocalDate dueDate;
 
-    Deadline(String title, String dueDate) {
+    Deadline(String title, String dueDateStr) {
         super(title);
-        this.dueDate = dueDate;
+        // parse the string into LocalDate
+        this.dueDate = LocalDate.parse(dueDateStr);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dueDate + ")";
+        // format it as "MMM d yyyy"
+        return "[D]" + super.toString() + " (by: " + dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
 
@@ -198,14 +203,16 @@ public class Cheryl {
                         System.out.println("OOPS!!! The description or date of a deadline cannot be empty.");
                     } else {
                         String title = parts[0].trim();
-                        String by = parts[1].trim();
-                        tasks.add(new Deadline(title, by));
+                        String byStr = parts[1].trim();
+                        // parse date
+                        LocalDate date = LocalDate.parse(byStr); // expects yyyy-MM-dd
+                        tasks.add(new Deadline(title, byStr));
                         System.out.println("Got it. I've added this task:");
                         System.out.println(tasks.get(tasks.size() - 1));
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     }
-                } catch (Exception e) {
-                    System.out.println("Invalid deadline format! Use: deadline <title> /by <date>");
+                } catch (DateTimeParseException e) {
+                    System.out.println("OOPS!!! Please use yyyy-MM-dd format for deadlines.");
                 }
             } else if (cmd.startsWith("event ")) {
                 try {
