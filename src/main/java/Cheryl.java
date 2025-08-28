@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 class Task {
@@ -69,6 +72,80 @@ class Event extends Task {
 
 
 public class Cheryl {
+    private static final String DATA_FOLDER = "./data";
+    private static final String DATA_FILE = "./data/task.txt";
+
+    // Load tasks from file
+    public static void loadTasks(ArrayList<Task> tasks) {
+        try {
+            File folder = new File(DATA_FOLDER);
+            if (!folder.exists()) {
+                folder.mkdir(); // create folder if missing
+            }
+
+            File file = new File(DATA_FILE);
+            if (!file.exists()) {
+                file.createNewFile(); // create file if missing
+                return;
+            }
+
+            Scanner fileScanner = new Scanner(file);
+            while (fileScanner.hasNextLine()) {
+                String line = fileScanner.nextLine();
+                String[] parts = line.split(" \\| ");
+                String type = parts[0];
+                boolean isDone = parts[1].equals("1");
+                String title = parts[2];
+
+                switch (type) {
+                    case "T":
+                        Task todo = new Todo(title);
+                        if (isDone) todo.mark();
+                        tasks.add(todo);
+                        break;
+                    case "D":
+                        String by = parts[3];
+                        Task deadline = new Deadline(title, by);
+                        if (isDone) deadline.mark();
+                        tasks.add(deadline);
+                        break;
+                    case "E":
+                        String from = parts[3];
+                        String to = parts[4];
+                        Task event = new Event(title, from, to);
+                        if (isDone) event.mark();
+                        tasks.add(event);
+                        break;
+                }
+            }
+            fileScanner.close();
+        } catch (Exception e) {
+            System.out.println("Warning: could not load tasks (file may be corrupted).");
+        }
+    }
+
+    public static void saveTasks(ArrayList<Task> tasks) {
+        try {
+            FileWriter fw = new FileWriter(DATA_FILE);
+            for (Task t : tasks) {
+                String line = "";
+                if (t instanceof Todo) {
+                    line = "T | " + (t.isDone ? "1" : "0") + " | " + t.title;
+                } else if (t instanceof Deadline) {
+                    Deadline d = (Deadline) t;
+                    line = "D | " + (d.isDone ? "1" : "0") + " | " + d.title + " | " + d.dueDate;
+                } else if (t instanceof Event) {
+                    Event e = (Event) t;
+                    line = "E | " + (e.isDone ? "1" : "0") + " | " + e.title + " | " + e.from + " | " + e.to;
+                }
+                fw.write(line + "\n");
+            }
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Error: could not save tasks.");
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<Task> tasks = new ArrayList<>();
