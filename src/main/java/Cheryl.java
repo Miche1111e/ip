@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
@@ -202,14 +203,16 @@ public class Cheryl {
                         System.out.println("OOPS!!! The description or date of a deadline cannot be empty.");
                     } else {
                         String title = parts[0].trim();
-                        String by = parts[1].trim();
-                        tasks.add(new Deadline(title, by));
+                        String byStr = parts[1].trim();
+                        // parse date
+                        LocalDate date = LocalDate.parse(byStr); // expects yyyy-MM-dd
+                        tasks.add(new Deadline(title, byStr));
                         System.out.println("Got it. I've added this task:");
                         System.out.println(tasks.get(tasks.size() - 1));
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
                     }
-                } catch (Exception e) {
-                    System.out.println("Invalid deadline format! Use: deadline <title> /by <date>");
+                } catch (DateTimeParseException e) {
+                    System.out.println("OOPS!!! Please use yyyy-MM-dd format for deadlines.");
                 }
             } else if (cmd.startsWith("event ")) {
                 try {
