@@ -34,6 +34,7 @@ public class Deadline extends Task {
      *
      * @return String in the format "[D][ ] title (by: yyyy-mm-dd)"
      */
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
