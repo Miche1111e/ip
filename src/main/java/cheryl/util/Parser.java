@@ -10,7 +10,20 @@ import cheryl.command.ListCommand;
 import cheryl.command.MarkCommand;
 import cheryl.command.UnmarkCommand;
 
+/**
+ * Parses user input strings into Command objects.
+ * Responsible for determining which command the user wants to execute.
+ */
+
 public class Parser {
+
+    /**
+     * Parses the full command string into a specific Command object.
+     *
+     * @param fullCommand The full user input string
+     * @return A Command object corresponding to the user input
+     * @throws DukeException If the command is unknown or arguments are invalid
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] parts = fullCommand.split(" ", 2);
         String commandWord = parts[0];

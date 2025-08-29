@@ -9,10 +9,19 @@ import cheryl.util.Ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a command to add a Deadline task.
+ */
 public class AddDeadlineCommand extends Command {
     private String title;
     private LocalDate by;
 
+    /**
+     * Creates a new AddDeadlineCommand with the given arguments.
+     *
+     * @param arguments The deadline arguments in format "title /by yyyy-MM-dd"
+     * @throws DukeException If the input format is invalid or date is wrong
+     */
     public AddDeadlineCommand(String arguments) throws DukeException {
         try {
             String[] parts = arguments.split("/by", 2);
@@ -29,6 +38,14 @@ public class AddDeadlineCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command: adds a new Deadline to the TaskList.
+     *
+     * @param tasks   The TaskList to add the Deadline to
+     * @param ui      The Ui to display messages
+     * @param storage The Storage to save the updated list
+     * @throws DukeException If an error occurs during saving
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = new Deadline(title, by);
         tasks.addTask(task);

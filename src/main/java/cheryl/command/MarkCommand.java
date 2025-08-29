@@ -5,9 +5,17 @@ import cheryl.util.Storage;
 import cheryl.util.TaskList;
 import cheryl.util.Ui;
 
+/**
+ * Represents a command to mark a task as done.
+ */
 public class MarkCommand extends Command {
     private int index;
 
+    /**
+     * Creates a new MarkCommand.
+     *
+     * @param arguments The index of the task to mark
+     */
     public MarkCommand(String arguments) throws DukeException {
         try {
             this.index = Integer.parseInt(arguments) - 1;
@@ -16,6 +24,9 @@ public class MarkCommand extends Command {
         }
     }
 
+    /**
+     * Executes the command: marks the task at the given index as done.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index < 0 || index >= tasks.getSize()) {
             throw new DukeException("Invalid task number");

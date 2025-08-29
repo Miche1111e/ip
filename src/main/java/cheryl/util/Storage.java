@@ -12,14 +12,27 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-
+/**
+ * Handles reading from and writing to the file system for task persistence.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Creates a new Storage with the given file path.
+     *
+     * @param filePath Path to the file where tasks are saved
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads the list of tasks from the file.
+     *
+     * @return List of tasks loaded from the file
+     * @throws IOException If an I/O error occurs during loading
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
@@ -70,6 +83,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the list of tasks to the file.
+     *
+     * @param tasks List of tasks to save
+     * @throws IOException If an I/O error occurs during saving
+     */
     public void save(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task t : tasks) {

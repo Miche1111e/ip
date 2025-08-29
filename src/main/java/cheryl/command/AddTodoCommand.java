@@ -7,9 +7,18 @@ import cheryl.util.Storage;
 import cheryl.util.TaskList;
 import cheryl.util.Ui;
 
+/**
+ * Represents a command to add a Todo task.
+ */
 public class AddTodoCommand extends Command {
     private String title;
 
+    /**
+     * Creates a new AddTodoCommand with the given arguments.
+     *
+     * @param arguments The title of the Todo task
+     * @throws DukeException If the title is empty
+     */
     public AddTodoCommand(String arguments) throws DukeException {
         if (arguments.trim().isEmpty()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
@@ -17,6 +26,14 @@ public class AddTodoCommand extends Command {
         this.title = arguments.trim();
     }
 
+    /**
+     * Executes the command: adds a new Todo to the TaskList.
+     *
+     * @param tasks   The TaskList to add the Todo to
+     * @param ui      The Ui to display messages
+     * @param storage The Storage to save the updated list
+     * @throws DukeException If an error occurs during saving
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = new Todo(title);
         tasks.addTask(task);
