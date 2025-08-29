@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * Provides methods to manipulate the list such as adding, deleting, or marking tasks.
  */
 public class TaskList {
+
     private ArrayList<Task> tasks;
 
     /**
