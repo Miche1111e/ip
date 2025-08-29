@@ -11,6 +11,7 @@ import cheryl.command.MarkCommand;
 import cheryl.command.UnmarkCommand;
 
 public class Parser {
+
     public static Command parse(String fullCommand) throws DukeException {
         String[] parts = fullCommand.split(" ", 2);
         String commandWord = parts[0];
