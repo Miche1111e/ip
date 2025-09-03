@@ -14,7 +14,6 @@ import cheryl.command.UnmarkCommand;
  * Parses user input strings into Command objects.
  * Responsible for determining which command the user wants to execute.
  */
-
 public class Parser {
 
     /**
@@ -47,7 +46,9 @@ public class Parser {
             case "delete":
                 return new DeleteCommand(arguments);
             default:
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException(
+                        "OOPS!!! I'm sorry, but I don't know what that means :-("
+                );
         }
     }
 }

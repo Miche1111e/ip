@@ -4,16 +4,15 @@ package cheryl.task;
  * Represents a generic task with a description and completion status.
  */
 public class Task {
-    String title;
-    boolean isDone;
+    private String title;
+    private boolean isDone;
 
     /**
      * Creates a new Task with the given title.
      *
      * @param title The description/title of the task
      */
-
-     public Task (String title) {
+    public Task (String title) {
         this.title = title;
         this.isDone = false;
     }

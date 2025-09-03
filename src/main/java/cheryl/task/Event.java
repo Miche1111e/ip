@@ -4,8 +4,8 @@ package cheryl.task;
  * Represents an event task with a start and end time.
  */
 public class Event extends Task {
-    String from;
-    String to;
+    private String from;
+    private String to;
 
     /**
      * Creates a new Event task.

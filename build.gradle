@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
@@ -38,3 +39,11 @@ shadowJar {
 run{
     standardInput = System.in
 }
+
+checkstyle {
+    toolVersion = "11.0.0"
+    configFile = rootProject.file("config/checkstyle/checkstyle.xml")
+    configDirectory.set(rootProject.file("config/checkstyle"))
+}
+
+

@@ -1,7 +1,9 @@
 package cheryl.util;
 
-import cheryl.task.Task;
 import java.util.ArrayList;
+
+import cheryl.task.Task;
+
 
 /**
  * Represents a list of tasks.

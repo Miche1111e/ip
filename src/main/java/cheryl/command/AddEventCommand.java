@@ -1,7 +1,7 @@
 package cheryl.command;
 
-import cheryl.task.Task;
 import cheryl.task.Event;
+import cheryl.task.Task;
 import cheryl.util.DukeException;
 import cheryl.util.Storage;
 import cheryl.util.TaskList;

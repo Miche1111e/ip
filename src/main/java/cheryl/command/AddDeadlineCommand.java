@@ -1,13 +1,15 @@
 package cheryl.command;
 
-import cheryl.task.Task;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import cheryl.task.Deadline;
+import cheryl.task.Task;
 import cheryl.util.DukeException;
 import cheryl.util.Storage;
 import cheryl.util.TaskList;
 import cheryl.util.Ui;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
+
 
 /**
  * Represents a command to add a Deadline task.
