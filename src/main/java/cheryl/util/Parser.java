@@ -1,14 +1,6 @@
 package cheryl.util;
 
-import cheryl.command.AddDeadlineCommand;
-import cheryl.command.AddEventCommand;
-import cheryl.command.AddTodoCommand;
-import cheryl.command.Command;
-import cheryl.command.DeleteCommand;
-import cheryl.command.ExitCommand;
-import cheryl.command.ListCommand;
-import cheryl.command.MarkCommand;
-import cheryl.command.UnmarkCommand;
+import cheryl.command.*;
 
 /**
  * Parses user input strings into Command objects.
@@ -49,6 +41,9 @@ public class Parser {
                 return new AddEventCommand(arguments);
             case "delete":
                 return new DeleteCommand(arguments);
+            // add this inside switch(commandWord) in Parser
+            case "schedule":
+                return new ScheduleCommand(arguments);
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

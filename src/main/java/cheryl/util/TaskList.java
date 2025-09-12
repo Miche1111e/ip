@@ -1,7 +1,12 @@
 package cheryl.util;
 
+import cheryl.task.Deadline;
+import cheryl.task.Event;
 import cheryl.task.Task;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a list of tasks.
@@ -41,7 +46,6 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is invalid
      */
     public Task deleteTask(int index) {
-        assert index >= 0 && index < tasks.size() : "deleteTask : index out of bounds";
         return tasks.remove(index);
     }
 
@@ -94,5 +98,19 @@ public class TaskList {
      */
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    public List<Task> getTasksForDate(LocalDate date) {
+        return tasks.stream()
+                .filter(t -> {
+                    if (t instanceof Deadline) {
+                        return ((Deadline) t).getDueDate().equals(date);
+                    } else if (t instanceof Event) {
+                        Event e = (Event) t;
+                        return e.getFrom().equals(date.toString()) || e.getTo().equals(date.toString());
+                    }
+                    return false;
+                })
+                .collect(Collectors.toList());
     }
 }
