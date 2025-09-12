@@ -25,9 +25,12 @@ public class Parser {
      * @throws DukeException If the command is unknown or arguments are invalid
      */
     public static Command parse(String fullCommand) throws DukeException {
+        assert fullCommand != null : "fullCommand should not be null";
         String[] parts = fullCommand.split(" ", 2);
+
         String commandWord = parts[0];
         String arguments = parts.length > 1 ? parts[1] : "";
+        assert !commandWord.isEmpty() : "commandWord should not be empty";
 
         switch (commandWord) {
             case "bye":
