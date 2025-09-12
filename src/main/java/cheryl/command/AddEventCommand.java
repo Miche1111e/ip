@@ -10,7 +10,7 @@ import cheryl.util.Ui;
 /**
  * Represents a command to add an Event task.
  */
-public class AddEventCommand extends Command {
+public class AddEventCommand implements Command {
     private String title;
     private String from;
     private String to;

@@ -12,7 +12,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents a command to add a Deadline task.
  */
-public class AddDeadlineCommand extends Command {
+public class AddDeadlineCommand implements Command {
     private String title;
     private LocalDate by;
 

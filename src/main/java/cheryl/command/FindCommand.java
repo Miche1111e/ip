@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Represents a command to find tasks containing a keyword.
  */
-public class FindCommand extends Command {
+public class FindCommand implements Command {
     private String keyword;
 
     /**

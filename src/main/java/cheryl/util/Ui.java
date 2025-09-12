@@ -1,5 +1,7 @@
 package cheryl.util;
 
+import cheryl.task.Task;
+
 import java.util.Scanner;
 
 /**
@@ -80,4 +82,14 @@ public class Ui {
     public void clearLastOutput() {
         outputBuffer.setLength(0);
     }
+
+    public void showTaskStatusChanged(Task task, boolean isMarked) {
+        if (isMarked) {
+            showMessage("Nice! I've marked this task as done:");
+        } else {
+            showMessage("OK, I've marked this task as not done yet:");
+        }
+        showMessage(task.toString());
+    }
+
 }

@@ -6,10 +6,13 @@ import cheryl.util.TaskList;
 import cheryl.util.Ui;
 
 /**
- * Represents a command in the Duke application.
- * All commands must implement the execute() method.
+ * Represents a user command in the Duke application.
+ *
+ * This is part of the Command pattern used in Cheryl:
+ * each subclass encapsulates a specific user action (e.g. add, delete, exit),
+ * and defines how it should be executed.
  */
-public abstract class Command {
+public interface Command {
 
     /**
      * Executes the command.
