@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
+import java.util.Objects;
 /**
  * Handles reading from and writing to the file system for task persistence.
  */
@@ -25,7 +24,8 @@ public class Storage {
      * @param filePath Path to the file where tasks are saved
      */
     public Storage(String filePath) {
-        this.filePath = filePath;
+        this.filePath = Objects.requireNonNull(filePath, "filePath must not be null");
+        assert !this.filePath.isBlank() : "filePath should not be blank";
     }
 
     /**
