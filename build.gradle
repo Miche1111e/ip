@@ -8,9 +8,8 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
-}
+def javaFxVersion = '17.0.7'
+def osName = org.gradle.internal.os.OperatingSystem.current().toString().toLowerCase()
 
 test {
     useJUnitPlatform()
@@ -27,7 +26,7 @@ test {
 }
 
 application {
-    mainClass = 'cheryl.Cheryl'
+    mainClass = 'cheryl.Launcher'
 }
 
 shadowJar {
@@ -37,4 +36,30 @@ shadowJar {
 
 run{
     standardInput = System.in
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-controls', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-fxml', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+}
+
+tasks.withType(JavaExec) {
+    // Pass module path and add-modules to JVM at runtime
+    def javafxModules = 'javafx.controls,javafx.fxml'
+    jvmArgs = [
+            "--module-path", classpath.asPath,
+            "--add-modules", javafxModules
+    ]
 }

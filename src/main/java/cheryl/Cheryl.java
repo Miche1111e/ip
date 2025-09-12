@@ -44,4 +44,31 @@ public class Cheryl {
     public static void main(String[] args) {
         new Cheryl("./data/task.txt").run();
     }
+
+    /**
+     * Returns the welcome message for the GUI by invoking Ui.showWelcome()
+     * and returning the accumulated buffer.
+     */
+    public String getWelcome() {
+        // ensure we start with a clean buffer
+        ui.clearLastOutput();
+        ui.showWelcome();
+        return ui.getLastOutput();
+    }
+
+    public String getResponse(String input) {
+        ui.clearLastOutput();
+
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            String resp = ui.getLastOutput();
+            return resp == null ? "" : resp;
+        } catch (DukeException e) {
+            // Ensure GUI also receives the error text
+            String err = "☹ OOPS!!! " + e.getMessage();
+            ui.showError(err);
+            return ui.getLastOutput();
+        }
+    }
 }
