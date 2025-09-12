@@ -33,7 +33,10 @@ public class TaskList {
      * @param task The task to add
      */
     public void addTask(Task task) {
+        int before = tasks.size();
         tasks.add(task);
+        assert tasks.size() == before + 1 : "addTask must increase size by 1";
+        assert tasks.contains(task) : "addTask must result in the list containing new task";
     }
 
     /**
@@ -43,6 +46,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is invalid
      */
     public Task deleteTask(int index) {
+        assert index >= 0 && index < tasks.size() : "deleteTask : index out of bounds";
         return tasks.remove(index);
     }
 
@@ -62,7 +66,11 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is invalid
      */
     public void markTask(int index) {
-        tasks.get(index).mark();
+        Task t = tasks.get(index);
+        boolean before = t.isDone();
+        t.mark();
+
+        assert t.isDone() : "markTask must change status to done";
     }
 
     /**

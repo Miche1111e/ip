@@ -12,9 +12,9 @@ public class Task {
      *
      * @param title The description/title of the task
      */
-
      public Task (String title) {
         this.title = title;
+        assert !this.title.isBlank() : "Task title should not be blank";
         this.isDone = false;
     }
 
@@ -23,6 +23,8 @@ public class Task {
      */
     public void mark() {
         this.isDone = true;
+
+        assert this.isDone : "mark() must set isDone to true";
     }
 
     /**
@@ -30,6 +32,8 @@ public class Task {
      */
     public void unmark() {
         isDone = false;
+
+        assert !this.isDone : "unmark() must set isDone to false";
     }
 
     /**
@@ -57,6 +61,7 @@ public class Task {
      */
     @Override
     public String toString() {
+        assert title != null : "title must not be null";
         return "[" + (isDone ? "X" : " ") + "] " + title;
     }
 }
