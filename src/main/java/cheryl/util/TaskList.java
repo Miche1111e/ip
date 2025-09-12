@@ -41,6 +41,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is invalid
      */
     public Task deleteTask(int index) {
+        assert index >= 0 && index < tasks.size() : "deleteTask : index out of bounds";
         return tasks.remove(index);
     }
 
@@ -60,7 +61,11 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is invalid
      */
     public void markTask(int index) {
-        tasks.get(index).mark();
+        Task t = tasks.get(index);
+        boolean before = t.isDone();
+        t.mark();
+
+        assert t.isDone() : "markTask must change status to done";
     }
 
     /**
