@@ -10,7 +10,7 @@ import cheryl.util.Ui;
 /**
  * Represents a command to add a Todo task.
  */
-public class AddTodoCommand extends Command {
+public class AddTodoCommand implements Command {
     private String title;
 
     /**

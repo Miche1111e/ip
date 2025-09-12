@@ -9,7 +9,7 @@ import cheryl.util.Ui;
 /**
  * Represents a command to delete a task.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand implements Command {
     private int index;
 
     /**

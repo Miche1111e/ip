@@ -7,7 +7,7 @@ import cheryl.util.Ui;
 /**
  * Represents a command to list all tasks in the task list.
  */
-public class ListCommand extends Command {
+public class ListCommand implements Command {
     /**
      * Executes the command: displays all tasks in the TaskList.
      *

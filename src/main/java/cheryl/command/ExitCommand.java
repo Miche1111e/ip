@@ -7,7 +7,7 @@ import cheryl.util.Ui;
 /**
  * Represents a command to exit the application.
  */
-public class ExitCommand extends Command {
+public class ExitCommand implements Command {
 
     /**
      * Executes the command: prints a farewell message.

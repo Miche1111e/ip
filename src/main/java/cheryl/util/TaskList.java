@@ -28,7 +28,10 @@ public class TaskList {
      * @param task The task to add
      */
     public void addTask(Task task) {
+        int before = tasks.size();
         tasks.add(task);
+        assert tasks.size() == before + 1 : "addTask must increase size by 1";
+        assert tasks.contains(task) : "addTask must result in the list containing new task";
     }
 
     /**
